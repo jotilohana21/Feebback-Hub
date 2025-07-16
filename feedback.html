@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="form-body">
+
+  <div class="form-header-centered">
+  <a href="index.html" class="back-arrow">
+    <span class="material-icons">arrow_back</span>
+  </a>
+  <h2 class="form-title">Feedback Hub</h2>
+</div>
+
+  <div class="form-card">
+    <form id="feedbackForm">
+
+  <label><span class="material-icons">person</span> Name</label>
+  <input type="text" name="name" placeholder="Write your name" required>
+
+  <label><span class="material-icons">email</span> Email</label>
+  <input type="email" name="email" placeholder="Write your email" required>
+
+  <label><span class="material-icons">chat</span> Message</label>
+  <textarea name="message" rows="3" placeholder="Write your message" required></textarea>
+
+  <label><span class="material-icons">category</span> Category</label>
+  <div class="select-wrapper">
+    <select name="category" required>
+      <option value="" disabled selected>Select category</option>
+      <option>Assignment</option>
+      <option>Course Material</option>
+      <option>Exam</option>
+      <option>Other</option>
+    </select>
+    <span class="material-icons dropdown-icon">arrow_drop_down</span>
+  </div>
+
+  <button type="submit">Submit Feedback</button>
+</form>
+  </div>
+
+  <script>
+  document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+    e.preventDefault(); 
+
+    const form = e.target;
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value,
+      category: form.category.value
+    };
+
+    fetch("https://feedbackapi-internship-c9chhje6ace9bjce.centralindia-01.azurewebsites.net/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Basic YWRtaW46cGFzc3dvcmQ="
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+  if (response.ok) {
+    alert("Thanks for your feedback, " + form.name.value + "!");
+    window.location.href = "thankyou.html";
+  } else {
+    return response.json().then(err => {
+      alert("Submission failed:\n" + JSON.stringify(err));
+    });
+  }
+})
+    .catch(error => {
+      alert("Network error:\n" + error.message);
+    });
+  });
+</script>
+
+</body>
+</html>
