@@ -41,6 +41,17 @@ Feedback Hub is a clean, responsive feedback collection web application built wi
 3. Fill in the form and click "Submit Feedback".  
 4. You'll be redirected to the Thank You page if the submission is successful.
 
+## 📸 Screenshots
+
+### 🏠 Landing Page
+![Landing Page](landing-page.png)
+
+### 📝 Feedback Form
+![Feedback Form](feedback-form.png)
+
+### ✅ Thank You Page
+![Thank You Page](thankyou-page.png)
+
 ## ✅ Status
 
 ✔️ Completed  
